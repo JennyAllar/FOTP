@@ -1,0 +1,24 @@
+<%= form_for @list do |f| %>
+  <%= f.label :piece_1, "Name" %>
+  <%= f.text_field :piece_1 %><br>
+  <%= f.label :piece_2, "I'm thankful for (separate with commas):" %>
+  <%= f.text_area :piece_2 %><br>
+  <%= f.label :cycle_length, "Please select your cycle length" %>
+  <%= f.select :cycle_length, 12..60 %>
+  <%= f.submit "Create List" %>
+<% end %>
+<br><br>
+<hr>
+<br><br>
+<% @lists.each do |list| %>
+  <% days = list.cycle_length %>
+  <%= list.piece_1 %>'s List:<br>
+  <% split_list = list.piece_2.split(",").sort_by{rand} %>
+    <% n = days - 1 %>
+  <% split_list.each do |item| %>
+  Day <%= days - n %>:
+  <%= item %><br>
+  <% n -= 1 %>
+  <% end %>
+<br><br>
+<% end %>
